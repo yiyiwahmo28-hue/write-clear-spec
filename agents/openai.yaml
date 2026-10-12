@@ -1,0 +1,4 @@
+interface:
+  display_name: "需求写清楚"
+  short_description: "在 AI 开发前写清需求，找出遗漏与矛盾，说明怎样算完成，并检查改稿一致性"
+  default_prompt: "使用 $write-clear-spec 帮我把这份需求写清楚：找出关键缺口和规则矛盾，补齐已确认的行为与验收场景。"

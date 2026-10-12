@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="144" height="144" viewBox="0 0 144 144" fill="none">
+  <title>Write Clear Spec</title>
+  <desc>An original blue document mark with three defined rules and one orange open decision.</desc>
+  <rect x="27" y="16" width="90" height="112" rx="18" fill="#1677FF"/>
+  <path d="M47 43H97M47 61H85M47 79H73" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="95" cy="103" r="20" fill="white"/>
+  <circle cx="95" cy="103" r="12" fill="#FA8C16"/>
+  <path d="M47 103H65" stroke="white" stroke-width="8" stroke-linecap="round"/>
+</svg>

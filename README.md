@@ -1,66 +1,114 @@
-# Write Clear Spec
+<div align="center">
+
+<img src="./docs/assets/logo.svg" width="120" height="120" alt="Write Clear Spec logo" />
+
+<h1>Write Clear Spec</h1>
 
 **Clear specs before AI writes code.**
 
-Turn rough ideas into clear requirements for your coding agent. Ask the missing questions, catch conflicting rules, and define what counts as done. Keep related requirements aligned as plans change.
+An Agent Skill for turning rough ideas into clear requirements, finding missing decisions, and keeping changes consistent.
 
-For product managers, designers, and builders who know what they want to make but need help spelling out how it should work. Start with an idea, a draft, or a change request. The skill identifies decisions that affect implementation and turns confirmed answers into functional requirements. Open decisions stay visible.
+[![Skill version](https://img.shields.io/badge/skill-v0.1.0-1677FF?style=flat-square)](SKILL.md) [![MIT license](https://img.shields.io/badge/license-MIT-1677FF?style=flat-square)](LICENSE) [![Agent Skill](https://img.shields.io/badge/format-Agent_Skill-596579?style=flat-square)](SKILL.md)
 
-## 中文说明
+[Quickstart](#quickstart) · [Example](#example) · [Feedback](https://github.com/yiyiwahmo28-hue/write-clear-spec/issues) · English · [简体中文](README.zh-CN.md)
 
-**在 AI 写代码之前，先把需求写清楚。**
+</div>
 
-帮用 AI 做产品的人，把零散想法写成功能需求：问清关键问题、找出遗漏和矛盾，说明怎样才算完成。改需求时一并检查相关规则，未确认的决定单独标出。
+---
 
-适合产品经理、策划和用 AI 做产品的人：知道想做什么，但还没有把功能怎样工作说完整。把一个想法交给开发之前、评审已有需求时、修改规则之后，都可以使用。
+For product managers, designers, and builders working with AI. Bring an idea, a draft, or a change request. The skill helps you decide what the feature should do and how to check it.
 
-- **写清楚：**从“支持上传文件”这样的想法出发，问清格式、结果和失败处理，再写成具体需求。
-- **审一遍：**在评审前找出开发仍然需要猜的地方，指出原文位置和需要决定的问题。
-- **改完整：**改一条规则时，同步相关内容与验收场景，检查新旧说法是否冲突。
+## Features
 
-它不会替产品负责人决定未确认的功能，也不会把目录齐全或测试场景写完等同于功能已经通过验证。
+- **Draft with the right questions.** Find decisions that would change implementation, then write the confirmed behavior.
+- **Review with evidence.** Point to the source of an ambiguity, conflicting rule, or missing acceptance condition.
+- **Revise consistently.** Follow a change through related rules and scenarios in the supplied material.
+- **Keep decisions visible.** Separate confirmed requirements, open questions, and optional suggestions. Use your language and document format.
 
-## Use
+## Quickstart
 
-Keep the complete `write-clear-spec` folder together, including `references/` and `agents/`. Place it in a skill directory supported by your assistant. Where named skill invocation is supported, invoke `$write-clear-spec`; otherwise ask the assistant to read `SKILL.md` and apply it to the supplied requirement.
+Install with the [Skills CLI](https://github.com/vercel-labs/skills), then select your assistant:
 
-This is an original, MIT-licensed Agent Skill. It requires no external service or executable dependency of its own; the host assistant supplies the model and any authorized file access. The two reference files are loaded only when the task needs them. `agents/openai.yaml` supplies optional interface metadata; the main instructions remain usable without that file.
-
-Example prompts:
-
-```text
-Use $write-clear-spec to review this requirement. List decisions that could
-change implementation, with their source locations. Do not rewrite it yet.
+```sh
+npx skills add yiyiwahmo28-hue/write-clear-spec --skill write-clear-spec
 ```
 
-```text
-使用 $write-clear-spec 把这个功能想法整理成需求。先列出已有事实，
-只追问会影响实现的关键问题；其他已确认部分继续写。
-```
+The installer uses Node.js and npm. The skill itself is a folder of instructions with no executable dependency or external service of its own. It uses your assistant's model and authorized file access.
+
+In an assistant that supports named skill invocation, start with:
 
 ```text
-使用 $write-clear-spec 更新这份需求：只更改我指定的规则，
-同步相关验收场景，并指出缺少资料而无法核对的关联内容。
+Use $write-clear-spec to review this requirement.
+Ask about decisions that change the behavior. Do not rewrite it yet.
+
+[Paste your requirement here]
 ```
 
-## What the skill adds
+<details>
+<summary>Manual setup and other prompts</summary>
 
-The core is behavior clarification and evidence-backed review: actor, trigger, eligibility, outcome, feedback, relevant exceptions, and verification. It separates confirmed decisions from open questions and optional suggestions. It also traces the consequences of revisions in the supplied material.
+Download this repository, name its folder `write-clear-spec`, and place it in a skill directory supported by your assistant. Keep `SKILL.md`, `references/`, and `agents/` together. To try it without named invocation, ask your assistant to read `SKILL.md` and apply it to your requirement, with the supporting files available.
 
-There is no prescribed chapter count, diagram, typography, priority scale, or compression target. Team-specific conventions can be provided with the task. Explicit technical contracts remain part of the requirement when relevant.
+**Draft an idea**
 
-See [SKILL.md](SKILL.md) for the workflow, [review guide](references/review-guide.md) for a deeper review, and [original examples](references/examples.md) for fictional cases.
+```text
+Use $write-clear-spec to turn this idea into functional requirements.
+Ask only about consequential missing decisions and continue with confirmed parts.
+```
 
-## Scope and provenance
+**Update a requirement**
 
-All instructions and examples in this package were independently written for this skill. Examples are fictional; no real project names, internal links, source excerpts, business configurations, or machine-specific paths are included.
+```text
+Use $write-clear-spec to apply this rule change.
+Update the affected acceptance scenarios and flag dependencies you cannot check.
+```
 
-This release supports specification work. It does not choose a product strategy or independently prove an implementation works. Use actual execution evidence to establish implementation results. Reduced rework or improved implementation accuracy has not been measured as a general performance claim.
+</details>
+
+## Example
+
+### “Let users cancel and return their place.”
+
+*An original, fictional event-registration example. The answers below are decisions supplied by the fictional user.*
+
+**The skill asks:**
+
+- When is cancellation allowed?
+- What happens if the same registration is canceled twice, or cancellation fails?
+- Should a canceled registration still appear in the active list?
+
+**The user confirms:** cancellation is allowed before the registration deadline. Success immediately returns one place and removes the registration from the active list. Admin exports include active registrations only. Repeated cancellation releases no additional place; failure changes neither the registration nor capacity.
+
+**The resulting requirements make the consequences explicit:**
+
+- Successful cancellation decreases the active count by one, frees one place, and excludes the registration from the active-registration export.
+- Canceling that same registration again does not free another place.
+- Failed cancellation preserves the registration's pre-operation status and remaining capacity.
+
+<details>
+<summary>Acceptance scenario and open decisions</summary>
+
+Before the deadline, start with a full event and cancel one active registration. Exactly one place should become available. Repeat the cancellation: available places must not increase again. Check that the canceled registration is absent from the active count and export.
+
+Behavior at the exact deadline and success/failure messages still need a decision. These are expected results to verify; no event application was executed for this example.
+
+The fuller [registration-change example](references/examples.md#示例三需求更新时保留规则并找出关联遗漏) also covers re-registration, remaining capacity, and preserving existing rules.
+
+</details>
+
+## Documentation
+
+- [Skill instructions](SKILL.md) — the draft, review, and revise workflow.
+- [Review guide](references/review-guide.md) — evidence, consistency, and verification.
+- [Worked examples (中文)](references/examples.md) — missing decisions, concrete requirements, and scoped changes.
+- [中文说明](README.zh-CN.md) — the complete Chinese introduction.
 
 ## Contributing
 
-Useful contributions are small, fictional before/after cases that show a consequential ambiguity, a conflicting rule, or a revision dependency. State the confirmed input, the open decisions, and what the proposed guidance changes. Keep examples independent of employer materials, customer data, and internal systems.
+Share a small, fictional before/after case in an [issue](https://github.com/yiyiwahmo28-hue/write-clear-spec/issues). Include the input, confirmed decisions, and what the skill missed. Improvements to questions, examples, and wording are welcome.
+
+All instructions and examples were independently written for this skill. Keep contributions free of employer materials, customer data, and internal systems. This project supports specification work; implementation results require actual execution evidence.
 
 ## License
 
-[MIT](LICENSE). Version 0.1.0.
+[MIT](LICENSE).

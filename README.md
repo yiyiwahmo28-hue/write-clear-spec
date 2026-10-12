@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/assets/logo.svg" width="120" height="120" alt="Write Clear Spec logo" />
+<img src="./docs/assets/logo.svg" width="72" height="72" alt="Write Clear Spec logo" />
 
 <h1>Write Clear Spec</h1>
 
@@ -10,20 +10,23 @@ An Agent Skill for turning rough ideas into clear requirements, finding missing 
 
 [![Skill version](https://img.shields.io/badge/skill-v0.1.0-1677FF?style=flat-square)](SKILL.md) [![MIT license](https://img.shields.io/badge/license-MIT-1677FF?style=flat-square)](LICENSE) [![Agent Skill](https://img.shields.io/badge/format-Agent_Skill-596579?style=flat-square)](SKILL.md)
 
-[Quickstart](#quickstart) · [Example](#example) · [Feedback](https://github.com/yiyiwahmo28-hue/write-clear-spec/issues) · English · [简体中文](README.zh-CN.md)
+[Demo](#demo) · [Quickstart](#quickstart) · [Feedback](https://github.com/yiyiwahmo28-hue/write-clear-spec/issues) · English · [简体中文](README.zh-CN.md)
 
 </div>
 
----
+## Demo
 
-For product managers, designers, and builders working with AI. Bring an idea, a draft, or a change request. The skill helps you decide what the feature should do and how to check it.
+<div align="center">
 
-## Features
+<img src="./docs/assets/demo-en.gif" width="880" alt="Skill conversation progressing from a one-line cancellation request to clarifying questions, confirmed rules, acceptance scenarios, and a requirement revision" />
 
-- **Draft with the right questions.** Find decisions that would change implementation, then write the confirmed behavior.
-- **Review with evidence.** Point to the source of an ambiguity, conflicting rule, or missing acceptance condition.
-- **Revise consistently.** Follow a change through related rules and scenarios in the supplied material.
-- **Keep decisions visible.** Separate confirmed requirements, open questions, and optional suggestions. Use your language and document format.
+*Fictional example. Translated excerpts from an actual Skill conversation, reformatted; not a screen recording.*
+
+[Full original conversation](docs/demo.md) · [Static version](docs/assets/demo-en.png)
+
+</div>
+
+For product managers, designers, and builders working with AI. Start with an idea, a draft, or a rule change.
 
 ## Quickstart
 
@@ -33,43 +36,49 @@ Install with the [Skills CLI](https://github.com/vercel-labs/skills), then selec
 npx skills add yiyiwahmo28-hue/write-clear-spec --skill write-clear-spec
 ```
 
-The installer uses Node.js and npm. The skill itself is a folder of instructions with no executable dependency or external service of its own. It uses your assistant's model and authorized file access.
-
-In an assistant that supports named skill invocation, start with:
+In an assistant that supports named Skill invocation, copy this request:
 
 ```text
-Use $write-clear-spec to review this requirement.
-Ask about decisions that change the behavior. Do not rewrite it yet.
-
-[Paste your requirement here]
+Use $write-clear-spec to clarify this requirement:
+“Support registration cancellation and release the reserved place after cancellation.”
+Ask the key questions first. Do not decide the rules for me.
 ```
+
+**Try it without installing the Skill:** give your assistant the contents of [SKILL.md](SKILL.md) and the same requirement. For deeper reviews, also make the required [reference files](references/) available.
 
 <details>
-<summary>Manual setup and other prompts</summary>
+<summary>Installer requirements and manual setup</summary>
 
-Download this repository, name its folder `write-clear-spec`, and place it in a skill directory supported by your assistant. Keep `SKILL.md`, `references/`, and `agents/` together. To try it without named invocation, ask your assistant to read `SKILL.md` and apply it to your requirement, with the supporting files available.
+The Skills CLI installer requires Node.js and npm. The Skill itself is a folder of instructions with no executable dependency or external service of its own. It uses your assistant's model and authorized file access.
 
-**Draft an idea**
-
-```text
-Use $write-clear-spec to turn this idea into functional requirements.
-Ask only about consequential missing decisions and continue with confirmed parts.
-```
-
-**Update a requirement**
-
-```text
-Use $write-clear-spec to apply this rule change.
-Update the affected acceptance scenarios and flag dependencies you cannot check.
-```
+For manual setup, download this repository, name its folder `write-clear-spec`, and place it in a Skill directory supported by your assistant. Keep `SKILL.md`, `references/`, and `agents/` together.
 
 </details>
 
-## Example
+## Features
 
-### “Let users cancel and return their place.”
+Choose the focus that fits the task; these approaches can be used together.
 
-*An original, fictional event-registration example. The answers below are decisions supplied by the fictional user.*
+| Task | Focus |
+| --- | --- |
+| Copyediting | Clear wording and readable sentences |
+| Fixed document template | Consistent structure and sections |
+| This Skill | Behavior rules, open decisions, and consistency after changes |
+
+The Skill drafts, reviews, or revises requirements in your language and format. Confirmed decisions, open questions, and optional suggestions stay separate.
+
+## Documentation
+
+- [Skill instructions](SKILL.md) — the draft, review, and revise workflow.
+- [Review guide](references/review-guide.md) — evidence, consistency, and verification.
+- [Worked examples (中文)](references/examples.md) — missing decisions, concrete requirements, and scoped changes.
+
+<details>
+<summary>Separate fictional example: cancellation and admin exports</summary>
+
+### “Support registration cancellation and release the reserved place.”
+
+*This standalone fictional example includes admin-export rules confirmed by its fictional user. It is separate from the conversation shown in the Demo.*
 
 **The skill asks:**
 
@@ -85,8 +94,7 @@ Update the affected acceptance scenarios and flag dependencies you cannot check.
 - Canceling that same registration again does not free another place.
 - Failed cancellation preserves the registration's pre-operation status and remaining capacity.
 
-<details>
-<summary>Acceptance scenario and open decisions</summary>
+**Acceptance scenario and open decisions**
 
 Before the deadline, start with a full event and cancel one active registration. Exactly one place should become available. Repeat the cancellation: available places must not increase again. Check that the canceled registration is absent from the active count and export.
 
@@ -95,13 +103,6 @@ Behavior at the exact deadline and success/failure messages still need a decisio
 The fuller [registration-change example](references/examples.md#示例三需求更新时保留规则并找出关联遗漏) also covers re-registration, remaining capacity, and preserving existing rules.
 
 </details>
-
-## Documentation
-
-- [Skill instructions](SKILL.md) — the draft, review, and revise workflow.
-- [Review guide](references/review-guide.md) — evidence, consistency, and verification.
-- [Worked examples (中文)](references/examples.md) — missing decisions, concrete requirements, and scoped changes.
-- [中文说明](README.zh-CN.md) — the complete Chinese introduction.
 
 ## Contributing
 

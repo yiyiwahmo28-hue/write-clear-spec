@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="./docs/assets/logo.svg" width="120" height="120" alt="Write Clear Spec 标识" />
+<img src="./docs/assets/logo.svg" width="72" height="72" alt="Write Clear Spec 标识" />
 
 <h1>Write Clear Spec</h1>
 
@@ -10,20 +10,23 @@
 
 [![Skill 版本](https://img.shields.io/badge/skill-v0.1.0-1677FF?style=flat-square)](SKILL.md) [![MIT 许可证](https://img.shields.io/badge/license-MIT-1677FF?style=flat-square)](LICENSE) [![Agent Skill](https://img.shields.io/badge/format-Agent_Skill-596579?style=flat-square)](SKILL.md)
 
-[快速开始](#快速开始) · [看个例子](#看个例子) · [反馈问题](https://github.com/yiyiwahmo28-hue/write-clear-spec/issues) · [English](README.md) · 简体中文
+[演示](#演示) · [快速开始](#快速开始) · [反馈问题](https://github.com/yiyiwahmo28-hue/write-clear-spec/issues) · [English](README.md) · 简体中文
 
 </div>
 
----
+## 演示
 
-适合产品经理、策划和用 AI 做产品的人。带来一个想法、一份草稿或一次改动，让 Skill 帮你写清功能怎样工作、怎样才算完成。
+<div align="center">
 
-## 特性
+<img src="./docs/assets/demo-zh-CN.gif" width="880" alt="从一句取消报名需求，到关键追问、确认规则、验收场景和规则改稿的 Skill 对话演示" />
 
-- **写清楚：** 找出会影响实现的关键决定，再把已确认的行为写成需求。
-- **审一遍：** 定位原文中的歧义、规则矛盾和验收缺口，说明还需要决定什么。
-- **改完整：** 改一条规则时，一并检查给定材料中受影响的规则和验收场景。
-- **保留决定权：** 区分已确认、待决定与可选建议，沿用你的语言和文档格式。
+*虚构案例，实际 Skill 对话节选，经重新排版；非录屏。*
+
+[原始完整对话](docs/demo.md) · [静态版](docs/assets/demo-zh-CN.png)
+
+</div>
+
+适合产品经理、策划和用 AI 做产品的人。从一个想法、一份草稿或一次规则改动开始。
 
 ## 快速开始
 
@@ -33,43 +36,49 @@
 npx skills add yiyiwahmo28-hue/write-clear-spec --skill write-clear-spec
 ```
 
-安装命令需要 Node.js 和 npm。Skill 本身是一个指令文件夹，使用助手提供的模型和已授权文件访问能力，无需独立运行服务。
-
-在支持按名称调用 Skill 的助手中，可以这样开始：
+在支持按名称调用 Skill 的助手中，可以直接复制：
 
 ```text
-使用 $write-clear-spec 检查这段需求。
-先问清会影响功能行为的关键决定，暂时不要改写。
-
-[在这里粘贴需求]
+使用 $write-clear-spec 把这条需求写清楚：
+“支持取消报名，取消后返还名额。”
+先问关键问题，不替我决定规则。
 ```
+
+**先不安装 Skill 也能试：** 将 [SKILL.md](SKILL.md) 的内容和同一条需求提供给助手。深入审查时，同时提供所需的[参考资料](references/)。
 
 <details>
-<summary>手动安装与其他用法</summary>
+<summary>安装环境与手动安装</summary>
 
-下载仓库，将文件夹命名为 `write-clear-spec`，放入你的助手支持的 Skill 目录。将 `SKILL.md`、`references/` 和 `agents/` 保持在一起。也可以在提供完整文件夹后，让助手读取 `SKILL.md`，按其中的方法处理需求。
+Skills CLI 安装命令需要 Node.js 和 npm。Skill 本身是一个指令文件夹，使用助手提供的模型和已授权文件访问能力，无需独立运行服务。
 
-**整理一个想法**
-
-```text
-使用 $write-clear-spec 把这个功能想法整理成需求。
-只追问会影响实现的关键问题，已确认的部分继续写。
-```
-
-**修改已有需求**
-
-```text
-使用 $write-clear-spec 更新这份需求。
-同步受影响的验收场景，并指出缺少资料而无法核对的关联内容。
-```
+手动安装时，下载仓库，将文件夹命名为 `write-clear-spec`，放入你的助手支持的 Skill 目录。将 `SKILL.md`、`references/` 和 `agents/` 保持在一起。
 
 </details>
 
-## 看个例子
+## 特性
+
+根据任务选择侧重点，这些用途可以结合使用。
+
+| 用途 | 侧重点 |
+| --- | --- |
+| 措辞润色 | 表达清楚、语句通顺 |
+| 固定文档模板 | 统一结构与栏目 |
+| 本 Skill | 行为规则、待决定问题、修改后的一致性 |
+
+Skill 沿用你的语言和格式，写需求、审需求或改需求，并区分已确认规则、待决定问题和可选建议。
+
+## 文档
+
+- [Skill 指令](SKILL.md)：写需求、审需求、改需求的完整流程。
+- [审查指南](references/review-guide.md)：检查证据、一致性与验收条件。
+- [原创示例](references/examples.md)：需求缺口、具体规则和局部改稿。
+
+<details>
+<summary>独立虚构案例：取消报名与管理员导出</summary>
 
 ### “支持取消报名，取消后返还名额。”
 
-*原创虚构案例。下面的规则由案例中的用户确认。*
+*这份独立虚构案例包含由案例中的用户确认的管理员导出规则，与首屏对话演示分别定义。*
 
 **Skill 先问清楚：**
 
@@ -85,8 +94,7 @@ npx skills add yiyiwahmo28-hue/write-clear-spec --skill write-clear-spec
 - 对同一条已取消报名重复操作：名额不再增加。
 - 取消失败：保持操作前的报名状态和剩余名额。
 
-<details>
-<summary>展开验收场景与待决定事项</summary>
+**验收场景与待决定事项**
 
 在截止前，从满员状态取消一条有效报名，确认只恢复一个名额。再次取消同一条报名，确认名额不再增加。同时核对有效人数和导出名单。
 
@@ -95,13 +103,6 @@ npx skills add yiyiwahmo28-hue/write-clear-spec --skill write-clear-spec
 完整的[报名规则改稿示例](references/examples.md#示例三需求更新时保留规则并找出关联遗漏)还展示了再次报名、剩余名额和原有规则的检查。
 
 </details>
-
-## 文档
-
-- [Skill 指令](SKILL.md)：写需求、审需求、改需求的完整流程。
-- [审查指南](references/review-guide.md)：检查证据、一致性与验收条件。
-- [原创示例](references/examples.md)：需求缺口、具体规则和局部改稿。
-- [English](README.md)：英文介绍。
 
 ## 参与贡献
 

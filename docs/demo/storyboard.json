@@ -1,0 +1,139 @@
+{
+  "provenance": "Editorial animation of an actual assistant conversation applying SKILL.md to a fictional scenario. Excerpts are shortened and English text is translated. Full original conversation: ../demo.md. This is not a screen recording or an implementation test.",
+  "languages": {
+    "zh-CN": {
+      "badge": "SKILL DEMO · 中文",
+      "steps": ["一句需求", "关键追问", "用户确认", "验收场景", "修改规则"],
+      "disclosure": "虚构案例 · 实际对话节选，重新排版 · 非录屏 · 未运行报名产品",
+      "scenes": [
+        {
+          "duration_ms": 2600,
+          "headline": "把一句模糊需求，写成能检查的具体规则",
+          "left_label": "用户输入",
+          "left": "支持取消报名，\n取消后返还名额。",
+          "left_note": "先问关键问题，\n不要替我决定规则。",
+          "rows": [
+            {"title": "问清行为", "body": "谁能取消？何时截止？重复操作怎么办？"},
+            {"title": "写出验收", "body": "取消成功、重复取消、取消失败，分别看什么？"},
+            {"title": "检查改稿", "body": "改了取消期限，哪些规则和场景需要同步？"}
+          ]
+        },
+        {
+          "duration_ms": 4400,
+          "headline": "先问清会改变实现的三个问题",
+          "left_label": "原始需求",
+          "left": "支持取消报名，\n取消后返还名额。",
+          "left_note": "信息不足的地方，\n先保留为待决定。",
+          "rows": [
+            {"title": "谁能取消？什么时候允许？", "body": "身份、报名状态、截止时间。"},
+            {"title": "返还多少？还能再报名吗？", "body": "返还的数量和时机；重新报名条件。"},
+            {"title": "重复或失败时，怎么处理？", "body": "报名状态和剩余名额是否变化。"}
+          ]
+        },
+        {
+          "duration_ms": 4400,
+          "headline": "用户确认规则，未决事项仍然单独保留",
+          "left_label": "用户确认 · 节选",
+          "left": "截止前可取消\n成功立即返还 1 个\n重复不再返还\n失败保持原样",
+          "left_note": "完整决定与原始回答，\n见下方对话记录。",
+          "rows": [
+            {"title": "谁能操作", "body": "仅本人取消自己的有效报名。"},
+            {"title": "何时可以重新报名", "body": "仍在报名期内，而且有剩余名额。"},
+            {"title": "待决定：重复取消显示什么提示？", "body": "只确认了不重复返还，没有擅自补写提示。", "open": true}
+          ]
+        },
+        {
+          "duration_ms": 5400,
+          "headline": "把“返还名额”，变成有起点和结果的验收",
+          "left_label": "待执行的验收场景",
+          "left": "有明确初始状态\n有具体操作\n有可检查的结果",
+          "left_note": "这些是预期结果，\n不是已经通过的测试。",
+          "rows": [
+            {"title": "取消成功：剩余名额 0 → 1", "body": "本人、有效报名、截止前：立即返还一个名额。"},
+            {"title": "重复取消：剩余名额 1 → 1", "body": "同一条已取消报名，不能再返还一次。"},
+            {"title": "取消失败：状态与名额保持不变", "body": "报名仍有效，显示“取消失败，请重试”。"}
+          ]
+        },
+        {
+          "duration_ms": 6200,
+          "headline": "改取消期限时，别把重新报名期限一起改了",
+          "left_label": "用户提出变更",
+          "left": "取消截止：\n报名截止前\n↓\n活动开始前",
+          "left_note": "报名截止早于活动开始；\n重新报名仍按原报名期。",
+          "rows": [
+            {"title": "更新取消规则与截止边界场景", "body": "活动开始时刻及以后，不允许取消。"},
+            {"title": "保留重新报名的原有限制", "body": "原报名期内 + 仍有剩余名额。"},
+            {"title": "新增场景：报名已截止，活动还没开始", "body": "本人可取消有效报名，但不能重新报名。"}
+          ]
+        }
+      ]
+    },
+    "en": {
+      "badge": "SKILL DEMO · EN",
+      "steps": ["Request", "Questions", "Decisions", "Acceptance", "Revision"],
+      "disclosure": "Fictional case · Translated excerpts, reformatted · Not a recording · No app executed",
+      "scenes": [
+        {
+          "duration_ms": 2600,
+          "headline": "Turn a vague request into rules you can check.",
+          "left_label": "USER REQUEST",
+          "left": "Let users cancel\nand return\ntheir place.",
+          "left_note": "Ask first. Do not decide\nthe missing rules for me.",
+          "rows": [
+            {"title": "Clarify the behavior", "body": "Who can cancel? Until when? What if they repeat it?"},
+            {"title": "Define acceptance", "body": "What changes on success, repeat, and failure?"},
+            {"title": "Review the change", "body": "Which rules and scenarios follow a new deadline?"}
+          ]
+        },
+        {
+          "duration_ms": 4400,
+          "headline": "Ask three questions that change implementation.",
+          "left_label": "ORIGINAL REQUEST",
+          "left": "Let users cancel\nand return\ntheir place.",
+          "left_note": "Keep missing decisions\nopen until confirmed.",
+          "rows": [
+            {"title": "Who can cancel, and when?", "body": "Ownership, registration status, and the deadline."},
+            {"title": "How many places? Can they sign up again?", "body": "When capacity returns; re-registration conditions."},
+            {"title": "What about repeated or failed cancellation?", "body": "What happens to the registration and capacity?"}
+          ]
+        },
+        {
+          "duration_ms": 4400,
+          "headline": "Keep confirmed rules and open decisions separate.",
+          "left_label": "USER CONFIRMS · EXCERPTS",
+          "left": "Before the deadline\nReturn 1 on success\nNo double return\nNo change on failure",
+          "left_note": "Full decisions and answers\nare linked below the GIF.",
+          "rows": [
+            {"title": "Who can act", "body": "Only the owner of an active registration."},
+            {"title": "When re-registration is allowed", "body": "Within the registration period, with a place left."},
+            {"title": "Open: the message for repeated cancellation", "body": "No extra place is returned; the message is undecided.", "open": true}
+          ]
+        },
+        {
+          "duration_ms": 5400,
+          "headline": "Make “return a place” an observable outcome.",
+          "left_label": "ACCEPTANCE SCENARIOS",
+          "left": "A starting state\nA specific action\nAn expected result",
+          "left_note": "Expected results to verify,\nnot tests already passed.",
+          "rows": [
+            {"title": "Success: remaining places 0 → 1", "body": "Owner, active registration, before the deadline."},
+            {"title": "Repeat: remaining places 1 → 1", "body": "The same canceled registration releases no extra place."},
+            {"title": "Failure: status and capacity stay unchanged", "body": "Registration stays active. Show the confirmed error."}
+          ]
+        },
+        {
+          "duration_ms": 6200,
+          "headline": "A new cancel deadline must not extend sign-up.",
+          "left_label": "USER REQUESTS A CHANGE",
+          "left": "Cancel until:\nregistration closes\n↓\nthe event starts",
+          "left_note": "Registration closes first.\nIts deadline stays the same.",
+          "rows": [
+            {"title": "Update cancellation and boundary scenarios", "body": "No cancellation at or after the event's start time."},
+            {"title": "Preserve the original re-registration rule", "body": "Within the registration period, with a place left."},
+            {"title": "New case: sign-up closed, event not started", "body": "The owner can cancel, but cannot register again."}
+          ]
+        }
+      ]
+    }
+  }
+}
